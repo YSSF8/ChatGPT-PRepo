@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+
+:root {
+    --primary-bg: #1e1e1e;
+    --secondary-bg: rgb(52, 53, 65);
+    --tertiary-bg: #40414e;
+    --quaternary-bg: #2a2a2a;
+    --quinary-bg: #4c4d5c;
+    --border-color: rgb(86, 88, 105);
+    --text-color: #fff;
+    --secondary-text-color: #000;
+    --px: 5px;
+}
+
+* {
+    color: var(--text-color);
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: var(--primary-bg);
+    width: 4in;
+}
+
+.search-zone {
+    display: flex;
+    gap: calc(var(--px) / 2);
+    width: 100%;
+}
+
+button {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--px) + 3px);
+    padding: var(--px) calc(var(--px) * 1.5);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--tertiary-bg);
+    }
+}
+
+input,
+textarea {
+    outline: none;
+    border-radius: calc(var(--px) + 3px);
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary-bg);
+    padding: var(--px) calc(var(--px) * 1.5);
+    width: 100%;
+
+    &:focus {
+        border-color: #155fe5;
+    }
+}
+
+#repo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--px) / 2);
+    margin-top: var(--px);
+
+    button {
+        padding: calc(var(--px) * 2);
+    }
+}
+
+.action {
+    background-color: var(--quaternary-bg);
+    margin-top: var(--px);
+    border-radius: calc(var(--px) + 3px);
+    padding: 0 calc(var(--px) + 3px);
+    height: 0;
+}
+
+.action-label {
+    display: flex;
+
+    input {
+        width: max-content;
+    }
+
+    &.custom-prompt-label {
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &>div:first-child>div {
+            margin-bottom: calc(var(--px) + 2px);
+
+            &:last-child {
+                height: .8in;
+            }
+
+            &>.custom-prompt-input {
+                margin-top: var(--px);
+
+                &:is(textarea) {
+                    resize: none;
+                    height: calc(100% / 1.45);
+                    width: calc(100% / 1.15);
+                }
+            }
+        }
+    }
+}
+
+mark {
+    color: var(--secondary-text-color);
+}
+
+::-webkit-scrollbar {
+    width: calc(var(--px) + 3px);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--tertiary-bg);
+    border-radius: var(--px);
+
+    &:hover {
+        background-color: var(--quinary-bg);
+    }
+}

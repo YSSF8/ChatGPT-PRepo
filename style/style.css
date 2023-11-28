@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
+:root {
+  --primary-bg: #1e1e1e;
+  --secondary-bg: rgb(52, 53, 65);
+  --tertiary-bg: #40414e;
+  --quaternary-bg: #2a2a2a;
+  --quinary-bg: #4c4d5c;
+  --border-color: rgb(86, 88, 105);
+  --text-color: #fff;
+  --secondary-text-color: #000;
+  --px: 5px;
+}
+
+* {
+  color: var(--text-color);
+  font-family: "Raleway", sans-serif;
+}
+
+body {
+  background-color: var(--primary-bg);
+  width: 4in;
+}
+
+.search-zone {
+  display: flex;
+  gap: calc(var(--px) / 2);
+  width: 100%;
+}
+
+button {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: calc(var(--px) + 3px);
+  padding: var(--px) calc(var(--px) * 1.5);
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--tertiary-bg);
+}
+
+input,
+textarea {
+  outline: none;
+  border-radius: calc(var(--px) + 3px);
+  border: 1px solid var(--border-color);
+  background-color: var(--secondary-bg);
+  padding: var(--px) calc(var(--px) * 1.5);
+  width: 100%;
+}
+input:focus,
+textarea:focus {
+  border-color: #155fe5;
+}
+
+#repo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--px) / 2);
+  margin-top: var(--px);
+}
+#repo button {
+  padding: calc(var(--px) * 2);
+}
+
+.action {
+  background-color: var(--quaternary-bg);
+  margin-top: var(--px);
+  border-radius: calc(var(--px) + 3px);
+  padding: 0 calc(var(--px) + 3px);
+  height: 0;
+}
+
+.action-label {
+  display: flex;
+}
+.action-label input {
+  width: -moz-max-content;
+  width: max-content;
+}
+.action-label.custom-prompt-label {
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.action-label.custom-prompt-label > div:first-child > div {
+  margin-bottom: calc(var(--px) + 2px);
+}
+.action-label.custom-prompt-label > div:first-child > div:last-child {
+  height: 0.8in;
+}
+.action-label.custom-prompt-label > div:first-child > div > .custom-prompt-input {
+  margin-top: var(--px);
+}
+.action-label.custom-prompt-label > div:first-child > div > .custom-prompt-input:is(textarea) {
+  resize: none;
+  height: 68.9655172414%;
+  width: 86.9565217391%;
+}
+
+mark {
+  color: var(--secondary-text-color);
+}
+
+::-webkit-scrollbar {
+  width: calc(var(--px) + 3px);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--tertiary-bg);
+  border-radius: var(--px);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--quinary-bg);
+}/*# sourceMappingURL=style.css.map */
