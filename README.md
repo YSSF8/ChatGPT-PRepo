@@ -12,7 +12,7 @@ ChatGPT PRepo is an open-source Chrome/Edge extension that enhances your experie
 ## Installation
 
 1. Download or clone this repository.
-2. Open Chrome and navigate to `chrome://extensions` or `edge://extensions`.
+2. Open Chrome/Edge and navigate to `chrome://extensions` or `edge://extensions`.
 3. Enable Developer mode by ticking the checkbox in the upper-right corner.
 4. Click on the "Load unpacked" button and select the directory where you cloned or downloaded this repository.
 
