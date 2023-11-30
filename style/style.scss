@@ -2,13 +2,14 @@
 
 :root {
     --primary-bg: #1e1e1e;
-    --secondary-bg: rgb(52, 53, 65);
+    --secondary-bg: #343541;
     --tertiary-bg: #40414e;
     --quaternary-bg: #2a2a2a;
     --quinary-bg: #4c4d5c;
     --border-color: rgb(86, 88, 105);
     --text-color: #fff;
     --secondary-text-color: #000;
+    --transparent-bg: rgba(0, 0, 0, .7);
     --px: 5px;
 }
 
@@ -80,7 +81,7 @@ textarea {
         width: max-content;
     }
 
-    &.custom-prompt-label {
+    &.custom-label {
         align-items: flex-end;
         justify-content: space-between;
 
@@ -102,6 +103,28 @@ textarea {
             }
         }
     }
+}
+
+#updates-found {
+    font-weight: bold;
+    margin-bottom: calc(var(--px) * 2.5);
+    font-size: calc(var(--px) * 3.5);
+}
+
+.alert {
+    position: fixed;
+    left: 50%;
+    top: calc(var(--px) * 2);
+    transform: translateX(-50%) scale(.8);
+    background-color: var(--quaternary-bg);
+    padding: calc(var(--px) + 3px);
+    border-radius: calc(var(--px) + 3px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 calc(var(--px) / 2) var(--secondary-text-color);
+    cursor: default;
+    opacity: 0;
+    transition: 200ms;
+    transition-property: opacity, transform;
 }
 
 mark {

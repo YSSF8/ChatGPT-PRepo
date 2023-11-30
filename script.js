@@ -158,8 +158,9 @@ const repo = document.getElementById('repo');
 function createButton(onePrompt) {
     const button = document.createElement('button');
     button.role = 'button';
-    button.innerHTML = onePrompt.name;
+    button.innerHTML = escapeHTML(onePrompt.name);
     button.title = onePrompt.description;
+    button.dataset.name = onePrompt.name;
     repo.appendChild(button);
 
     button.addEventListener('click', () => {
@@ -176,6 +177,17 @@ function createButton(onePrompt) {
     return button;
 }
 
+function escapeHTML(text) {
+    const textNode = document.createTextNode(text);
+    const divElement = document.createElement('div');
+    divElement.appendChild(textNode);
+
+    let safeHTML = divElement.innerHTML;
+
+    return safeHTML;
+}
+
+
 for (let onePrompt of allPrompts) {
     createButton(onePrompt);
 }
@@ -186,7 +198,8 @@ if (Array.isArray(customPrompts) && customPrompts.length) {
         button.role = 'button';
         button.title = customPrompt.description;
         button.classList.add('custom-prompt-button');
-        button.innerHTML = customPrompt.name;
+        button.innerHTML = escapeHTML(customPrompt.name);
+        button.dataset.name = customPrompt.name;
         repo.appendChild(button);
 
         button.addEventListener('click', () => {
@@ -323,10 +336,10 @@ searchZone.querySelectorAll('button').forEach(btn => {
                     }
                 });
             });
-        } else {
+        } else if (option == 'customPrompt') {
             const sza = searchZoneAction({
                 markup: `
-                <div class="action-label custom-prompt-label">
+                <div class="action-label custom-label">
                     <div>
                         <div>
                             <div>Name</div>
@@ -380,16 +393,42 @@ searchZone.querySelectorAll('button').forEach(btn => {
                 document.getElementById('custom-prompt-clear').addEventListener('click', () => {
                     localStorage.removeItem('customPrompts');
                     document.querySelectorAll('.custom-prompt-button').forEach(btn => btn.remove());
+                    alert('Removed all custom prompts');
                 });
             }
+        } else {
+            checkForUpdates((boolean, currentVersion, upcomingVersion) => {
+                if (boolean) {
+                    searchZoneAction({
+                        markup: `
+                        <div class="action-label custom-label">
+                            <div>
+                                <div id="updates-found">Updates found!</div>
+                                <div>Current version: ${currentVersion}</div>
+                                <div style="height: auto;">Upcoming version: ${upcomingVersion}</div>
+                            </div>
+                            <div>
+                                <button role="button" id="install-update">Install</button>
+                            </div>
+                        </div>
+                        `,
+                        close: isActionOpened
+                    });
+
+                    document.getElementById('install-update').addEventListener('click', () => window.open('https://github.com/YSSF8/ChatGPT-PRepo'));
+                } else {
+                    alert('No new updates found!');
+                    isActionOpened = true;
+                }
+            });
         }
     });
 });
 
 function removeCustomPrompt(e) {
     if (e.button == 1) {
-        let button = event.target;
-        let name = button.innerHTML;
+        let button = e.target;
+        let name = button.dataset.name;
 
         button.parentNode.removeChild(button);
 
@@ -435,4 +474,63 @@ function searchZoneAction({
     }
 
     return action;
+}
+
+async function checkForUpdates(callback) {
+    async function currentVersion() {
+        const response = await fetch('./manifest.json');
+        const data = await response.json();
+        return data.version;
+    }
+
+    const localVersion = await currentVersion();
+
+    fetch('https://raw.githubusercontent.com/YSSF8/ChatGPT-PRepo/main/manifest.json')
+        .then(res => res.json())
+        .then(data => {
+            if (parseFloat(data.version) > parseFloat(localVersion)) {
+                callback(true, parseFloat(localVersion), parseFloat(data.version));
+            } else {
+                callback(false);
+            }
+        });
+}
+
+let alertQueue = [];
+
+function alert(message = 'New Message', timeout = 3000) {
+    alertQueue.push({ message, timeout });
+
+    if (alertQueue.length === 1) {
+        showAlert();
+    }
+
+    function showAlert() {
+        if (alertQueue.length == 0) return;
+
+        const { message, timeout } = alertQueue[0];
+
+        const content = document.createElement('div');
+        content.innerText = message;
+        content.classList.add('alert');
+        document.body.appendChild(content);
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                content.style.opacity = 1;
+                content.style.transform = 'translateX(-50%) scale(1)';
+            });
+        });
+
+        setTimeout(() => {
+            content.style.opacity = 0;
+            content.style.transform = 'translateX(-50%) scale(.8)';
+        }, timeout);
+
+        setTimeout(() => {
+            content.remove();
+            alertQueue.shift();
+            if (alertQueue.length > 0) showAlert();
+        }, timeout);
+    }
 }
