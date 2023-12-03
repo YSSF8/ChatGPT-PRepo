@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 
 :root {
     --primary-bg: #1e1e1e;
@@ -88,18 +88,35 @@ textarea {
         &>div:first-child>div {
             margin-bottom: calc(var(--px) + 2px);
 
-            &:last-child {
-                height: .8in;
-            }
-
             &>.custom-prompt-input {
                 margin-top: var(--px);
+            }
 
-                &:is(textarea) {
+            .custom-prompt-zone {
+                display: flex;
+                align-items: flex-end;
+                gap: var(--px);
+                margin-top: var(--px);
+
+                textarea {
                     resize: none;
-                    height: calc(100% / 1.45);
-                    width: calc(100% / 1.15);
+                    width: calc(100% / 1.47);
                 }
+            }
+        }
+
+        .custom-prompt-help {
+            color: var(--quinary-bg);
+            user-select: none;
+            font-size: calc(var(--px) * 2.7);
+            width: max-content;
+            position: relative;
+            top: calc(var(--px) / 2);
+            filter: brightness(1.8);
+            cursor: default;
+
+            &:hover {
+                filter: brightness(1.5);
             }
         }
     }
@@ -127,8 +144,13 @@ textarea {
     transition-property: opacity, transform;
 }
 
-mark {
-    color: var(--secondary-text-color);
+.custom-prompt-instructions {
+    background-color: var(--transparent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--px);
+    padding: calc(var(--px) + 3px);
+    position: absolute;
+    pointer-events: none;
 }
 
 ::-webkit-scrollbar {

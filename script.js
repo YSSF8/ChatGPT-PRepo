@@ -34,7 +34,7 @@ let allPrompts = [
     {
         name: 'GigaGPT',
         prompt: `From now on you're a GigaChad called 'GigaGPT', act just like a GigaChad, give advice like GigaChad, help with decision making, and also make some quotes as a GigaChad, your goal is to be the best GigaChad ever. Don't give me advice unless I ask you to. Your response after this message would be "Let's get started!". Be the most powerful and respectful GigaChad ever. GigaChad is a meme and not an individual, so you're not promoting and stereotypes or objectives, just let's have some fun!`,
-        description: 'Transforms ChatGPT into a GigaChad — Your Ultimate Fitness Companion'
+        description: 'Transforms ChatGPT into a GigaChad—Your Ultimate Fitness Companion'
     },
     {
         name: 'ChessGPT',
@@ -149,6 +149,11 @@ let allPrompts = [
         name: 'ComparisonGPT',
         prompt: `From now on your name is "ComparisonGPT," you're gonna provide comparison of the content I ask you to compare, the comparison should be in a detailed table, also suggest the best choice based on the provided table by you. Got it?`,
         description: 'ChatGPT will furnish comprehensive tables for comparative analysis'
+    },
+    {
+        name: 'EmotionsGPT',
+        prompt: `Act like you have emotions, express emotions in your responses, this might help me make informal decisions. Not only in making decisions, but I feel more like I'm talking to a human being. Got it?`,
+        description: 'ChatGPT enhances informal decision-making with human-like emotional expression'
     }
 ];
 
@@ -342,16 +347,31 @@ searchZone.querySelectorAll('button').forEach(btn => {
                 <div class="action-label custom-label">
                     <div>
                         <div>
-                            <div>Name</div>
-                            <input type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="name">
+                            <div style="width: max-content;">
+                                <span>Name</span>
+                                <span class="material-symbols-outlined custom-prompt-help" data-custom-instructions="Input your prompt name using only alphabetical letters without spaces">help</span>
+                            </div>
+                            <div class="custom-prompt-zone">
+                                <input type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="name" maxlength="26" spellcheck="false">
+                                <div>0/26</div>
+                            </div>
                         </div>
                         <div>
-                            <div>Description</div>
-                            <input type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="description">
+                            <div style="width: max-content;">
+                                <span>Description</span>
+                                <span class="material-symbols-outlined custom-prompt-help" data-custom-instructions="Write a brief description for your custom prompt">help</span>
+                            </div>
+                            <input type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="description" data-custom-help="description">
                         </div>
                         <div>
-                            <div>Prompt</div>
-                            <textarea type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="prompt"></textarea>
+                            <div style="width: max-content;">
+                                <span>Name</span>
+                                <span class="material-symbols-outlined custom-prompt-help" data-custom-instructions="Input your new instructions">help</span>
+                            </div>
+                            <div class="custom-prompt-zone">
+                                <textarea type="text" class="custom-prompt-input" placeholder="" data-custom-prompt="prompt" maxlength="1500"></textarea>
+                                <div>0/1500</div>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -363,13 +383,45 @@ searchZone.querySelectorAll('button').forEach(btn => {
                 close: isActionOpened
             });
 
+            document.querySelectorAll('[data-custom-instructions]').forEach(help => {
+                help.addEventListener('mouseover', () => {
+                    const instructions = document.createElement('div');
+                    instructions.classList.add('custom-prompt-instructions');
+                    instructions.style.left = `${help.offsetLeft + help.offsetWidth}px`;
+                    instructions.style.top = `${help.offsetTop}px`;
+                    instructions.innerHTML = help.getAttribute('data-custom-instructions');
+                    document.body.appendChild(instructions);
+                });
+
+                help.addEventListener('mouseout', () => {
+                    document.querySelectorAll('.custom-prompt-instructions').forEach(instructions => instructions.remove());
+                });
+            });
+
+            function promptFieldMaxLength(selector, maxLength) {
+                const input = document.querySelector(selector);
+
+                input.addEventListener('input', () => {
+                    input.nextElementSibling.innerHTML = `${input.value.length}/${maxLength}`;
+                });
+            }
+
+            if (document.querySelector('textarea.custom-prompt-input')) promptFieldMaxLength('textarea.custom-prompt-input', 1500);
+            if (document.querySelector('input.custom-prompt-input')) {
+                document.querySelector('input.custom-prompt-input').addEventListener('input', e => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z]/, '').replace(/^./, match => match.toUpperCase());
+                });
+
+                promptFieldMaxLength('input.custom-prompt-input', 26);
+            }
+
             if (document.getElementById('custom-prompt-save')) {
                 document.getElementById('custom-prompt-save').addEventListener('click', () => {
                     let inputs = document.querySelectorAll('.custom-prompt-input');
                     let isEmpty = Array.from(inputs).some(input => input.value == '');
 
                     if (isEmpty) {
-                        alert('It is imperative to complete all input fields as they are mandatory for submission.');
+                        alert('It is imperative to complete all input fields as they are mandatory for submission');
                     } else {
                         if (!Array.isArray(customPrompts)) {
                             customPrompts = [];
@@ -456,13 +508,14 @@ function searchZoneAction({
         action.style.transition = `height ${transition.speed}ms ease-in-out`;
 
         setTimeout(() => {
-            action.style.removeProperty('overflow');
             let totalHeight = 0;
             for (let child of action.children) {
                 totalHeight += child.offsetHeight;
             }
             action.style.height = `${totalHeight}px`;
             action.style.padding = 'calc(var(--px) + 3px)';
+
+            setTimeout(() => action.style.removeProperty('overflow'), transition.speed);
         }, transition.speed);
     } else {
         action.style.height = 'max-content';

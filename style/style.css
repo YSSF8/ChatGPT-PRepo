@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
 :root {
   --primary-bg: #1e1e1e;
   --secondary-bg: #343541;
@@ -85,16 +85,34 @@ textarea:focus {
 .action-label.custom-label > div:first-child > div {
   margin-bottom: calc(var(--px) + 2px);
 }
-.action-label.custom-label > div:first-child > div:last-child {
-  height: 0.8in;
-}
 .action-label.custom-label > div:first-child > div > .custom-prompt-input {
   margin-top: var(--px);
 }
-.action-label.custom-label > div:first-child > div > .custom-prompt-input:is(textarea) {
+.action-label.custom-label > div:first-child > div .custom-prompt-zone {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--px);
+  margin-top: var(--px);
+}
+.action-label.custom-label > div:first-child > div .custom-prompt-zone textarea {
   resize: none;
-  height: 68.9655172414%;
-  width: 86.9565217391%;
+  width: 68.0272108844%;
+}
+.action-label.custom-label .custom-prompt-help {
+  color: var(--quinary-bg);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  font-size: calc(var(--px) * 2.7);
+  width: -moz-max-content;
+  width: max-content;
+  position: relative;
+  top: calc(var(--px) / 2);
+  filter: brightness(1.8);
+  cursor: default;
+}
+.action-label.custom-label .custom-prompt-help:hover {
+  filter: brightness(1.5);
 }
 
 #updates-found {
@@ -119,8 +137,13 @@ textarea:focus {
   transition-property: opacity, transform;
 }
 
-mark {
-  color: var(--secondary-text-color);
+.custom-prompt-instructions {
+  background-color: var(--transparent-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--px);
+  padding: calc(var(--px) + 3px);
+  position: absolute;
+  pointer-events: none;
 }
 
 ::-webkit-scrollbar {
