@@ -73,6 +73,7 @@ textarea:focus {
 
 .action-label {
   display: flex;
+  align-items: center;
 }
 .action-label input {
   width: -moz-max-content;

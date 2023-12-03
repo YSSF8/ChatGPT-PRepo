@@ -375,8 +375,8 @@ searchZone.querySelectorAll('button').forEach(btn => {
                         </div>
                     </div>
                     <div>
-                        <button id="custom-prompt-clear">Clear</button>
-                        <button id="custom-prompt-save">Save</button>
+                        <button id="custom-prompt-clear" title="Clear all of the saved custom prompts.\nMiddle click to delete a single one.">Clear</button>
+                        <button id="custom-prompt-save" title="Save the current configured custom prompt.">Save</button>
                     </div>
                 </div>
                 `,
