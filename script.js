@@ -588,4 +588,6 @@ function alert(message = 'New Message', timeout = 3000) {
     }
 }
 
-document.addEventListener('mousedown', e => e.preventDefault());
+document.addEventListener('mousedown', e => {
+    if (e.button == 1) e.preventDefault();
+});
