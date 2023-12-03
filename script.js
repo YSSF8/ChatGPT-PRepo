@@ -587,3 +587,5 @@ function alert(message = 'New Message', timeout = 3000) {
         }, timeout);
     }
 }
+
+document.addEventListener('mousedown', e => e.preventDefault());
