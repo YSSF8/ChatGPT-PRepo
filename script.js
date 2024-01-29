@@ -299,11 +299,30 @@ searchZone.querySelectorAll('button').forEach(btn => {
                 close: isActionOpened
             });
 
+            let enabled = ['descriptionSearch'];
+
             document.querySelectorAll('.filter-box').forEach(box => {
                 box.addEventListener('click', () => {
-                    filterLog[box.getAttribute('data-event')] = !filterLog[box.getAttribute('data-event')];
+                    let event = box.getAttribute('data-event');
+                    filterLog[event] = !filterLog[event];
+                    if (filterLog[event]) {
+                        enabled.push(event);
+                    } else {
+                        let index = enabled.indexOf(event);
+                        if (index !== -1) {
+                            enabled.splice(index, 1);
+                        }
+                    }
+                    btn.title = `Filter:\n- ${camelCaseToSentence(enabled.join('\n- '))}`;
                 });
             });
+
+            function camelCaseToSentence(str) {
+                return str.replace(/([A-Z])/g, ' $1')
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            }
         } else if (option == 'sort') {
             searchZoneAction({
                 markup: `
