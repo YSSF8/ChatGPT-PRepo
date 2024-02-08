@@ -6,6 +6,7 @@
   --quaternary-bg: #2a2a2a;
   --quinary-bg: #4c4d5c;
   --border-color: rgb(86, 88, 105);
+  --secondary-border-color: rgb(104, 106, 125);
   --text-color: #fff;
   --secondary-text-color: #000;
   --transparent-bg: rgba(0, 0, 0, .7);
@@ -50,7 +51,7 @@ textarea {
 }
 input:focus,
 textarea:focus {
-  border-color: #155fe5;
+  border-color: var(--secondary-border-color);
 }
 
 #repo {
