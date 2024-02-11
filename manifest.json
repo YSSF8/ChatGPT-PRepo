@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ChatGPT PRepo",
-    "version": "2.0",
+    "version": "2.1",
     "description": "A repository replete with ChatGPT prompts",
     "permissions": [
         "storage",
