@@ -38,6 +38,7 @@ A Chrome extension providing predefined prompts for ChatGPT. Access a curated co
 
 ## Project Structure
 
+```
 ChatGPT-PRepo/
 ├── data/
 │   └── prompts.csv             # Prompts database
@@ -60,6 +61,7 @@ ChatGPT-PRepo/
 ├── icon_editor.py              # Icon resize utility script
 ├── README.md                   # Project documentation
 └── LICENSE                     # License file
+```
 
 ## Development
 
@@ -67,11 +69,11 @@ The extension is built using vanilla JavaScript and SCSS. The prompt database is
 
 ### Key Components
 
-- `CSVParser`: Handles reading and parsing the prompts database
-- `Modal`: Reusable modal dialog component for UI interactions
-- `ContextMenu`: Handles right-click menu interactions
-- `FavoritesManager`: Manages user's favorite prompts
-- `EventTarget` based event system for component communication
+- **CSVParser**: Handles reading and parsing the prompts database
+- **Modal**: Reusable modal dialog component for UI interactions
+- **ContextMenu**: Handles right-click menu interactions
+- **FavoritesManager**: Manages user's favorite prompts
+- **EventTarget**: based event system for component communication
 
 ## Contributing
 
@@ -85,7 +87,3 @@ Feel free to contribute by:
 ## License
 
 This project is open source and licensed under the MIT License. Please ensure you have the right to use any prompts you contribute.
-
-## Version
-
-Current version: 2.0
