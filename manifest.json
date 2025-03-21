@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "ChatGPT-PRepo",
+    "version": "3.0.0 BETA",
+    "description": "A Chrome extension providing predefined prompts for ChatGPT.",
+    "author": "YSSF",
+    "icons": {
+        "128": "icons/original.png",
+        "48": "icons/original_small.png",
+        "16": "icons/original_smaller.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128": "icons/original.png",
+            "48": "icons/original_small.png",
+            "16": "icons/original_smaller.png"
+        }
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://chatgpt.com/*"
+    ]
+}
