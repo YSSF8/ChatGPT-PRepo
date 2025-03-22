@@ -140,8 +140,8 @@ function openEditPrompt(originalPrompt) {
             </div>
             <div class="group vertical-group">
                 <label for="prompt">Prompt:</label>
-                <textarea id="prompt" name="prompt" maxlength="3000" required>${originalPrompt.prompt}</textarea>
-                <small>${originalPrompt.prompt.length}/3000</small>
+                <textarea id="prompt" name="prompt" maxlength="3500" required>${originalPrompt.prompt}</textarea>
+                <small>${originalPrompt.prompt.length}/3500</small>
             </div>
             <button id="apply-edit" class="apply-modal">Save</button>
         </div>
@@ -155,7 +155,7 @@ function openEditPrompt(originalPrompt) {
     const applyButton = modalElement.querySelector('#apply-edit');
 
     promptElement.addEventListener('input', () => {
-        smallElement.textContent = `${promptElement.value.length}/3000`;
+        smallElement.textContent = `${promptElement.value.length}/3500`;
     });
 
     applyButton.addEventListener('click', () => {
