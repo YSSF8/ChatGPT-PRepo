@@ -59,8 +59,8 @@ addButton.addEventListener('click', () => {
             </div>
             <div class="group vertical-group">
                 <label for="prompt">Prompt:</label>
-                <textarea id="prompt" name="prompt" maxlength="3000" required></textarea>
-                <small>0/3000</small>
+                <textarea id="prompt" name="prompt" maxlength="3500" required></textarea>
+                <small>0/3500</small>
             </div>
             <button id="apply-add" class="apply-modal">Add</button>
         </div>
@@ -74,7 +74,7 @@ addButton.addEventListener('click', () => {
     const applyButton = modalElement.querySelector('#apply-add');
 
     promptElement.addEventListener('input', () => {
-        smallElement.textContent = `${promptElement.value.length}/3000`;
+        smallElement.textContent = `${promptElement.value.length}/3500`;
     });
 
     applyButton.addEventListener('click', () => {

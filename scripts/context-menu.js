@@ -25,8 +25,10 @@ class ContextMenu {
             border: '1px solid var(--border-color)',
             borderRadius: 'var(--spacing)',
             overflow: 'hidden',
+            animation: 'fade-in 200ms',
             zIndex: 1000,
-            minWidth: '150px'
+            minWidth: '150px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
         });
 
         for (const [label, callback] of Object.entries(this.menuItems)) {
