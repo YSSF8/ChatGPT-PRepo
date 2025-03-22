@@ -200,13 +200,16 @@ async function insertPromptToChatGPT(prompt) {
 
         await chrome.scripting.executeScript({
             target: { tabId: tab.id },
-            func: (promptText) => {
-                const placeholder = document.querySelector('.placeholder');
-                if (placeholder) {
-                    placeholder.textContent = promptText;
-                } else {
-                    alert('Could not find the prompt input field.\nIf anything is written in the prompt field, please clear it and try again.');
+            func: promptText => {
+                const promptTextarea = document.getElementById('prompt-textarea');
+                const prompt = promptTextarea.querySelector('p');
+
+                if (!promptTextarea && !prompt) {
+                    alert('Could not find the prompt input field.');
+                    return;
                 }
+
+                prompt.textContent = promptText;
             },
             args: [prompt]
         });
