@@ -75,7 +75,8 @@ function createPromptButtons() {
         });
 
         if (customPrompts.some(p => p.act === row.act)) {
-            button.style.borderLeft = '3px solid var(--scrollbar-color)';
+            const borderColor = isFavorite(row) ? 'var(--favorite-highlight-border-color)' : 'var(--scrollbar-color)';
+            button.style.borderLeft = `3px solid ${borderColor}`;
         }
 
         if (isFavorite(row)) {
@@ -112,6 +113,13 @@ function showContextMenu(e, row) {
         menuItems['Remove'] = () => {
             customPrompts = customPrompts.filter(p => p.act !== row.act);
             localStorage.setItem('customPrompts', JSON.stringify(customPrompts));
+
+            if (isFavorite(row)) {
+                const favorites = getFavorites();
+                const updatedFavorites = favorites.filter(act => act !== row.act);
+                localStorage.setItem('favoritePrompts', JSON.stringify(updatedFavorites));
+            }
+
             createPromptButtons();
         };
     }
