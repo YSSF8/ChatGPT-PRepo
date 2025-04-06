@@ -60,3 +60,52 @@ class Modal {
         this.overlay.remove();
     }
 }
+
+
+/**
+ * Represents a toast notification.
+ */
+class Toast {
+    /**
+     * 
+     * @param {string} message The content of the toast message.
+     */
+    constructor(message) {
+        this.toasts = document.querySelector('.toasts') || document.createElement('div');
+        this.toasts.className = 'toasts';
+        document.body.appendChild(this.toasts);
+
+        this.toast = document.createElement('div');
+        this.toast.className = 'toast';
+        this.toast.textContent = message;
+        this.toasts.appendChild(this.toast);
+    }
+
+    show() {
+        this.toast.classList.add('show');
+
+        setTimeout(() => {
+            this.toast.classList.remove('show');
+
+            setTimeout(() => {
+                this.toast.remove();
+
+                if (this.toasts.children.length === 0) {
+                    this.toasts.remove();
+                }
+            }, 300);
+
+        }, 3000);
+    }
+
+    hide() {
+        this.toast.classList.remove('show');
+        setTimeout(() => {
+            this.toast.remove();
+        }, 300);
+    }
+
+    remove() {
+        this.toast.remove();
+    }
+}
