@@ -202,7 +202,7 @@ async function insertPromptToChatGPT(prompt) {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
         if (!tab.url.includes('chatgpt.com')) {
-            alert('Please open ChatGPT first!');
+            new Toast('Please open ChatGPT first!').show();
             return;
         }
 
@@ -213,7 +213,7 @@ async function insertPromptToChatGPT(prompt) {
                 const prompt = promptTextarea.querySelector('p');
 
                 if (!promptTextarea && !prompt) {
-                    alert('Could not find the prompt input field.');
+                    new Toast('Could not find the prompt input field.').show();
                     return;
                 }
 
